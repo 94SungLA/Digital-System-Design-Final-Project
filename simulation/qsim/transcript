@@ -1,0 +1,124 @@
+# do clock.do 
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module alarm_clock
+# 
+# Top level modules:
+# 	alarm_clock
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module alarm_clock_vlg_sample_tst
+# -- Compiling module alarm_clock_vlg_check_tst
+# -- Compiling module alarm_clock_vlg_vec_tst
+# 
+# Top level modules:
+# 	alarm_clock_vlg_vec_tst
+# vsim -L cycloneiii_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate -c -t 1ps -novopt work.alarm_clock_vlg_vec_tst 
+# Loading work.alarm_clock_vlg_vec_tst
+# Loading work.alarm_clock
+# Loading cycloneiii_ver.cycloneiii_lcell_comb
+# Loading altera_ver.dffeas
+# Loading cycloneiii_ver.cycloneiii_io_ibuf
+# Loading cycloneiii_ver.cycloneiii_clkctrl
+# Loading cycloneiii_ver.cycloneiii_mux41
+# Loading cycloneiii_ver.cycloneiii_ena_reg
+# Loading cycloneiii_ver.cycloneiii_io_obuf
+# Loading work.alarm_clock_vlg_sample_tst
+# Loading work.alarm_clock_vlg_check_tst
+# Loading altera_ver.PRIM_GDFF_LOW
+# ERROR! Vector Mismatch for output port dot :: @time = 1000000.000 ps
+#      Expected value = 0
+#      Real value = 1
+# ERROR! Vector Mismatch for output port minute[0] :: @time = 1000000.000 ps
+#      Expected value = 000000
+#      Real value = 000001
+# ERROR! Vector Mismatch for output port seg0[6] :: @time = 1000000.000 ps
+#      Expected value = 0000000
+#      Real value = 1000000
+# ERROR! Vector Mismatch for output port seg1[6] :: @time = 1000000.000 ps
+#      Expected value = 0000000
+#      Real value = 1000000
+# ERROR! Vector Mismatch for output port seg2[6] :: @time = 1000000.000 ps
+#      Expected value = 0000000
+#      Real value = 1000000
+# ERROR! Vector Mismatch for output port seg3[0] :: @time = 1000000.000 ps
+#      Expected value = 0000000
+#      Real value = 1111001
+# ERROR! Vector Mismatch for output port seg3[3] :: @time = 1000000.000 ps
+#      Expected value = 0000000
+#      Real value = 1111001
+# ERROR! Vector Mismatch for output port seg3[4] :: @time = 1000000.000 ps
+#      Expected value = 0000000
+#      Real value = 1111001
+# ERROR! Vector Mismatch for output port seg3[5] :: @time = 1000000.000 ps
+#      Expected value = 0000000
+#      Real value = 1111001
+# ERROR! Vector Mismatch for output port seg3[6] :: @time = 1000000.000 ps
+#      Expected value = 0000000
+#      Real value = 1111001
+# ERROR! Vector Mismatch for output port minute[1] :: @time = 1310000.000 ps
+#      Expected value = 000000
+#      Real value = 000010
+# ERROR! Vector Mismatch for output port seg3[2] :: @time = 1310000.000 ps
+#      Expected value = 0000000
+#      Real value = 0100100
+# ERROR! Vector Mismatch for output port minute[2] :: @time = 2510000.000 ps
+#      Expected value = 000000
+#      Real value = 000100
+# ERROR! Vector Mismatch for output port seg3[1] :: @time = 3110000.000 ps
+#      Expected value = 0000000
+#      Real value = 0010010
+# ERROR! Vector Mismatch for output port minute[3] :: @time = 4910000.000 ps
+#      Expected value = 000000
+#      Real value = 001000
+# ERROR! Vector Mismatch for output port seg2[0] :: @time = 6110000.000 ps
+#      Expected value = 0000000
+#      Real value = 1111001
+# ERROR! Vector Mismatch for output port seg2[3] :: @time = 6110000.000 ps
+#      Expected value = 0000000
+#      Real value = 1111001
+# ERROR! Vector Mismatch for output port seg2[4] :: @time = 6110000.000 ps
+#      Expected value = 0000000
+#      Real value = 1111001
+# ERROR! Vector Mismatch for output port seg2[5] :: @time = 6110000.000 ps
+#      Expected value = 0000000
+#      Real value = 1111001
+# ERROR! Vector Mismatch for output port minute[4] :: @time = 9710000.000 ps
+#      Expected value = 000000
+#      Real value = 010000
+# ERROR! Vector Mismatch for output port seg2[2] :: @time = 12110000.000 ps
+#      Expected value = 0000000
+#      Real value = 0100100
+# ERROR! Vector Mismatch for output port minute[5] :: @time = 19310000.000 ps
+#      Expected value = 000000
+#      Real value = 100000
+# ERROR! Vector Mismatch for output port seg2[1] :: @time = 30110000.000 ps
+#      Expected value = 0000000
+#      Real value = 0010010
+# ERROR! Vector Mismatch for output port alarmo :: @time = 36110000.000 ps
+#      Expected value = 0
+#      Real value = 1
+# ERROR! Vector Mismatch for output port hour[0] :: @time = 36110000.000 ps
+#      Expected value = 00000
+#      Real value = 00001
+# ERROR! Vector Mismatch for output port seg1[0] :: @time = 36110000.000 ps
+#      Expected value = 0000000
+#      Real value = 1111001
+# ERROR! Vector Mismatch for output port seg1[3] :: @time = 36110000.000 ps
+#      Expected value = 0000000
+#      Real value = 1111001
+# ERROR! Vector Mismatch for output port seg1[4] :: @time = 36110000.000 ps
+#      Expected value = 0000000
+#      Real value = 1111001
+# ERROR! Vector Mismatch for output port seg1[5] :: @time = 36110000.000 ps
+#      Expected value = 0000000
+#      Real value = 1111001
+# ERROR! Vector Mismatch for output port hour[1] :: @time = 72110000.000 ps
+#      Expected value = 00000
+#      Real value = 00010
+# ERROR! Vector Mismatch for output port seg1[2] :: @time = 72110000.000 ps
+#      Expected value = 0000000
+#      Real value = 0100100
+#          31 mismatched vectors : Simulation failed !
+# ** Note: $finish    : clock.vt(978)
+#    Time: 100 us  Iteration: 0  Instance: /alarm_clock_vlg_vec_tst/tb_out
