@@ -1,3 +1,29 @@
+# 數位系統設計期末專案
+
+## 選擇的題目:
+
+第一題，時鐘(包含設定時間、12/24 小時制切換、鬧鐘功能)
+
+## 實現的功能:
+
+![alt text](image.png)
+
+### VHDL 程式碼
+
+#### 專案結構:
+
+```
+alarm_clock.vhd
+├─── hms_to_digits.vhd -> 將時、分轉換成4個數字
+├─── alarm.vhd -> 鬧鐘功能
+├─── decoder_7seg.vhd -> 七段顯示器解碼器
+├─── speaker.vhd -> 鬧鐘響的功能，目前以點亮所有LED實現
+└─── clock_12_24.vhd -> 12/24小時制轉換
+```
+
+#### alarm_clock.vhd:
+
+```vhdl
 -- combine the two previous examples
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
@@ -233,3 +259,156 @@ BEGIN
     hour <= h;
     minute <= m;
 END Behavioral;
+```
+
+#### hms_to_digits.vhd:
+
+```vhdl
+-- h m to 4 digits
+-- 4 digits are 0-2, 0-3, 0-5, 0-9
+
+LIBRARY IEEE;
+USE ieee.std_logic_1164.ALL;
+USE ieee.std_logic_unsigned.ALL;
+USE ieee.std_logic_arith.ALL;
+
+ENTITY hms_to_digits IS
+    PORT (
+        h : IN INTEGER RANGE 0 TO 23;
+        m : IN INTEGER RANGE 0 TO 59;
+        digit0 : OUT INTEGER RANGE 0 TO 9;
+        digit1 : OUT INTEGER RANGE 0 TO 9;
+        digit2 : OUT INTEGER RANGE 0 TO 5;
+        digit3 : OUT INTEGER RANGE 0 TO 9
+    );
+END hms_to_digits;
+
+-- consume h = 23, m = 59 -> 2 3 5 9
+ARCHITECTURE Behavioral OF hms_to_digits IS
+BEGIN
+    digit0 <= h / 10; -- 2
+    digit1 <= h MOD 10; -- 3
+    digit2 <= m / 10; -- 5
+    digit3 <= m MOD 10; -- 9
+END Behavioral;
+```
+
+#### alarm.vhd:
+
+```vhdl
+-- an alarm, takes current from clock and sets off an alarm when the time matches
+
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+ENTITY alarm IS
+    PORT (
+        now_digit0 : IN INTEGER RANGE 0 TO 9;
+        now_digit1 : IN INTEGER RANGE 0 TO 9;
+        now_digit2 : IN INTEGER RANGE 0 TO 5;
+        now_digit3 : IN INTEGER RANGE 0 TO 9;
+        alarm_digit0 : IN INTEGER RANGE 0 TO 9;
+        alarm_digit1 : IN INTEGER RANGE 0 TO 9;
+        alarm_digit2 : IN INTEGER RANGE 0 TO 5;
+        alarm_digit3 : IN INTEGER RANGE 0 TO 9;
+        alarmo : OUT STD_LOGIC
+    );
+
+END alarm;
+
+ARCHITECTURE Behavioral OF alarm IS
+BEGIN
+    alarmo <= '1' WHEN now_digit0 = alarm_digit0 AND now_digit1 = alarm_digit1 AND now_digit2 = alarm_digit2 AND now_digit3 = alarm_digit3 ELSE
+        '0';
+END Behavioral;
+```
+
+#### decoder_7seg.vhd:
+
+```vhdl
+-- decoder for 7-segment display
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.std_logic_unsigned.ALL;
+
+ENTITY decoder_7seg IS
+    PORT (
+        --BCD : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+        BCD : IN INTEGER RANGE 0 TO 9;
+        HEX : OUT STD_LOGIC_VECTOR(6 DOWNTO 0)
+    );
+END decoder_7seg;
+
+ARCHITECTURE decoder_7seg OF decoder_7seg IS
+BEGIN
+
+    HEX <= "1000000" WHEN BCD = 0 ELSE
+        "1111001" WHEN BCD = 1 ELSE
+        "0100100" WHEN BCD = 2 ELSE
+        "0110000" WHEN BCD = 3 ELSE
+        "0011001" WHEN BCD = 4 ELSE
+        "0010010" WHEN BCD = 5 ELSE
+        "0000010" WHEN BCD = 6 ELSE
+        "1111000" WHEN BCD = 7 ELSE
+        "0000000" WHEN BCD = 8 ELSE
+        "0010000" WHEN BCD = 9 ELSE
+        "1111111";
+END decoder_7seg;
+```
+
+#### speaker.vhd:
+
+```vhdl
+library ieee;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+ENTITY speaker IS
+    PORT (
+        alarmo : IN STD_LOGIC;
+		  led : OUT STD_LOGIC_VECTOR(9 downto 0)
+	 );
+END speaker;
+
+ARCHITECTURE Behavioral OF speaker IS
+BEGIN
+    led <= "1111111111" when alarmo = '1' else
+	     "0000000000";
+END Behavioral;
+
+```
+
+#### clock_12_24.vhd:
+
+```vhdl
+-- component use to convert 24 hour time to 12 hour time
+
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+ENTITY clock_12_24 IS
+    PORT (
+        h : IN INTEGER RANGE 0 TO 23;
+        m : IN INTEGER RANGE 0 TO 59;
+        h12 : OUT INTEGER RANGE 0 TO 12
+    );
+END clock_12_24;
+
+ARCHITECTURE Behavioral OF clock_12_24 IS
+BEGIN
+    h12 <= h - 12 WHEN h > 12 ELSE
+        h;
+END Behavioral;
+```
+
+## 心得:
+
+這個期末專案的題目不難，所以我想盡量讓功能完整一點，
+除了在鬧鐘和設定時間上有遇到 bug 之外都還算上手，
+這門課算是本學期數一數二讓我感到困難的，但是我卻獲得了滿滿的成就感。
+謝謝老師和助教這學期的教學和幫助!
